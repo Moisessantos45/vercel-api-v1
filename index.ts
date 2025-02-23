@@ -11,7 +11,9 @@ hono.get("/hello/:name", (c) => {
   return c.json({ message: `Hello, ${name}!` });
 });
 
+const port = process.env.PORT || 4000;
+
 export default {
-  port: 4000,
+  port,
   fetch: hono.fetch,
 };
