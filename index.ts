@@ -1,6 +1,8 @@
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 
 const hono = new Hono();
+hono.use(cors());
 
 hono.get("/", (c) => {
   return c.json({ message: "Hello, World!" });
