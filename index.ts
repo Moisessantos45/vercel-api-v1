@@ -1,19 +1,17 @@
-import express from "express";
+import { Hono } from "hono";
 
-const app = express();
+const hono = new Hono();
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+hono.get("/", (c) => {
+  return c.json({ message: "Hello, World!" });
 });
 
-app.get("/about", (req, res) => {
-  res.send("About page");
+hono.get("/hello/:name", (c) => {
+  const name = c.req.param("name");
+  return c.json({ message: `Hello, ${name}!` });
 });
 
-app.get("/user/:id", (req, res) => {
-  res.send(`User ID: ${req.params.id}`);
-});
-
-app.listen(4000, () => {
-  console.log("Server is running on port 3000");
-});
+export default {
+  port: 4000,
+  fetch: hono.fetch,
+};
